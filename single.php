@@ -5,11 +5,17 @@
     $template_uri = get_template_directory_uri();
 ?>
 
-
-<div class="contents_wrapper">
-
-<?php if (have_posts()) : ?>
-<?php while ( have_posts() ) : the_post(); ?>
+<article class="sPlace">
+    <div class="l_row mx_1024">
+        <div class="pd_side8">
+            <?php if (have_posts()) : ?><?php while ( have_posts() ) : the_post(); ?>
+                <?php
+                $attachment_id = get_field('cf_main__image');
+                if($attachment_id) {
+                    $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'original_16-9__lrg' );
+                    echo '<figure class="sPlace_hero"><img src="' . esc_html( $thumbnail_src[0] ) . '" class="" alt="' . get_the_title() . '"></figure>';
+                }
+                ?>
 
 
     <?php
@@ -57,17 +63,53 @@
     }?>
 
 
-<?php
-    for($i=1;$i<=5;$i++) {
-        $cf_contents__ttl = get_field('cf_contents__ttl'.$i.'');
-        if($cf_contents__ttl) {
-            $cf_contents = get_field('cf_contents'.$i.'');
-            echo '<p class="fz_20"><span>' . esc_attr($cf_contents__ttl) . '</span></p>';
-            echo '<p class="fz_15"><span>' . $cf_contents . '</span></p>';
-        } else {
-            break;
-        }
-    }?>
+    <?php if(have_rows('cf_contents')): ?>
+        <ul class="">
+            <?php while(have_rows('cf_contents')): the_row(); ?>
+                <?php
+                $contents_ttl = get_sub_field('cf_contents__ttl');
+                $contents_summary = get_sub_field('cf_contents__summary');
+                if($contents_ttl) {
+                    echo '<p class="fz_20"><span>' . esc_attr($contents_ttl) . '</span></p>';
+                }
+                if($contents_summary) {
+                    echo '<p class="fz_20"><span>' . $contents_summary . '</span></p>';
+                }
+                ?>
+            <?php endwhile; ?>
+        </ul>
+    <?php endif; ?>
+
+    <?php if(have_rows('cf_event')): ?>
+        <ul class="">
+            <?php while(have_rows('cf_event')): the_row(); ?>
+                <?php
+                $event = get_sub_field('cf_event__list');
+                if($contents_ttl) {
+                    echo '<p class="fz_20"><span>' . esc_attr($event) . '</span></p>';
+                }
+                ?>
+            <?php endwhile; ?>
+        </ul>
+    <?php endif; ?>
+
+
+    <?php if(have_rows('cf_subimage')): ?>
+        <ul class="">
+            <?php while(have_rows('cf_subimage')): the_row(); ?>
+                <?php
+                $attachment_id = get_sub_field('cf_subimage__img');
+                $full_img = wp_get_attachment_image_src( $attachment_id , 'full' );
+                if($attachment_id) {
+                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
+                    echo wp_get_attachment_image( $attachment_id, "thumbnail", false);
+                    echo '</a></li>';
+                }
+                ?>
+            <?php endwhile; ?>
+        </ul>
+    <?php endif; ?>
+
 
     <?php
     $cf_poetry = get_field('cf_poetry');
@@ -75,17 +117,16 @@
         echo '<div class="fz_15 serif">' . $cf_poetry . '</div>';
     }?>
 
-
-
-
-
     <?php
-    $attachment_id = get_field('cf_main__image');
-    if($attachment_id) {
-        $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'thumbnail' );
-        echo '<img src="' . esc_html( $thumbnail_src[0] ) . '" class="thumb" width="150">';
-    }
-    ?>
+    $cf_gmap = get_field('cf_gmap');
+    if($cf_gmap) {
+        echo '<div class="sPlace_gmap">';
+        echo '<iframe src="' . esc_url($cf_gmap) . '" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
+        echo '</div>';
+    }?>
+
+
+
     <article class="p_singleArticle">
         <div class="p_singleArticle__row">
             <figure class="p_singleArticle__Eyecatch">
@@ -134,43 +175,13 @@
         </div>
     </article>
 
-    <aside class="p_singleArticle__footer">
-        <div class="sns_section post">
-            <div class="sns_wrap">
-                <span id="score-facebook" class="snsbtn count_mode">
-                    <div class="fb-like" data-href="<?php echo the_permalink(); ?>" data-send="false" data-layout="box_count" data-show-faces="false" data-share="false"></div>
-                </span>
-                <span id="score-facebook" class="snsbtn icon_mode facebook">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(the_permalink()); ?>" class="btn" target="_blank">
-                        <i class="icn fab fa-facebook-f"></i><span class="txt">シェア</span>
-                    </a>
-                </span>
-                <span id="score-twitter" class="snsbtn icon_mode twitter">
-                    <a href="//twitter.com/share?url=<?php echo urlencode(the_permalink()); ?>&amp;text=<?php echo urlencode(bloginfo('name')); ?><?php echo urlencode(the_title()); ?>" class="btn" target="_blank">
-                        <i class="icn fab fa-twitter"></i><span class="txt">シェア</span>
-                    </a>
-                </span>
-                <span id="score-google" class="snsbtn icon_mode google">
-                    <a href="https://plus.google.com/share?url=<?php echo urlencode(the_permalink()); ?>" class="btn" target="_blank">
-                        <i class="icn fab fa-google-plus-g"></i><span class="txt">シェア</span>
-                    </a>
-                </span>
-                <span id="score-line" class="snsbtn icon_mode line">
-                    <a href="http://line.me/R/msg/text/?<?php echo urlencode(bloginfo('name')); ?><?php echo urlencode(the_title()); ?><?php echo urlencode(the_permalink()); ?>" class="btn" target="_blank">
-                        <i class="icn"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/line_wh.svg" width="30" alt="line"></i><span class="txt">シェア</span>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </aside>
 
 
-    <?php endwhile; ?>
-<?php endif; ?>
 
-
-</div><!-- contents_wrapper -->
-
+            <?php endwhile; ?><?php endif; ?>
+        </div><!-- pd_side8 -->
+    </div><!-- l_row -->
+</article>
 
 <?php get_footer(); ?>
 

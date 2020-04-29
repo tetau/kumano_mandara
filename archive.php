@@ -1,59 +1,61 @@
-<?php if (is_author()) : ?>
-    <?php header("HTTP/1.0 404 Not Found");get_template_part('404'); ?>
-
-<?php elseif (is_date()) : ?>
-    <?php get_header(); ?>
-
-    <?php if (is_day()) : ?><?php the_time('Y.m.d'); ?>
-    <?php elseif (is_month()) : ?><?php the_time('Y.m'); ?>
-    <?php elseif (is_year()) : ?><?php the_time('Y'); ?>
-    <?php endif; ?>
-
-        <?php if(have_posts()) : ?>
-
-            <?php while ( have_posts() ) : the_post(); ?>
-                <?php get_template_part( '_modules_article__loop' ); ?>
-            <?php endwhile; ?>
-
-            <?php get_template_part( 'pagenavi' ); ?>
-
-        <?php endif; ?>
-
-        <section class="">
-            <h2 class="">カテゴリー</h2>
-            <ul class="">
-                <?php wp_list_categories('taxonomy=category&title_li=&depth=1&hide_empty=1&show_count=0'); ?>
-            </ul>
-        </section>
-        <section class="">
-            <h2 class="">月別アーカイブ</h2>
-            <ul class="">
-                <?php wp_get_archives('post_type=post&type=monthly&show_post_count=1&limit=12'); ?>
-            </ul>
-        </section>
-
-<?php elseif (is_tax('faqcat')) : ?>
-
-<?php else : ?>
-
-    <?php if(have_posts()) : ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-            <?php the_title(); ?>
-        <?php endwhile; ?>
-    <?php endif; ?>
-
 <?php get_header(); ?>
 
-<div class="contents_wrapper">
-    <section class="md_pageHeader page__error">
-        <h2 class="md_pageHeader__Title">お探しのページが見つかりません。</h2>
-        <div class="md_pageHeader__description">
-            <p>大変申し訳ございません。お客さまがお探しのページを見つけることができませんでした。<br>お探しのページはアクセスできない状況にあるか、移動もしくは削除された可能性があります。</p>
-        </div>
-    </section>
-</div>
+<div class="aPlace">
+    <div class="l_row mx_1024">
+        <div class="pd_side8">
+            <div class="aPlace_head">
+                <h1 class="aPlace_ttl">
+                    <span>三十三箇所神社仏閣</span>
+                    <?php if(is_tax()):?><em class="aPlace_termTtl"><?php single_term_title(); ?></em><?php endif; ?>
+                </h1>
+                <?php
+                $args = array(
+                    'taxonomy' => 'area',
+                    'orderby' => 'menu_order',
+                    'hide_empty' => false,
+                );
+                $terms = get_terms($args);
+                ?>
+                <?php if($terms):?>
+                    <ul class="aPlace_area__list">
+                        <?php foreach($terms as $term) :?>
+                            <li><a href="<?php echo get_term_link($term->slug, $term->taxonomy); ?>"><span><?php echo $term->name; ?></span></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?><!-- if($terms) -->
+            </div>
+            <?php if(have_posts()) : ?>
+                <ul class="aPlace_place__list">
+                    <?php while ( have_posts() ) : the_post(); ?>
+                        <li>
+                            <?php
+                            $attachment_id = get_field('cf_main__image');
+                            if($attachment_id) {
+                                $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'original_16-9__lrg' );
+                                echo '<a href="' . get_permalink() . '"><figure class="aPlace_place__thumb"><img src="' . esc_html( $thumbnail_src[0] ) . '" class="" alt="' . get_the_title() . '"></figure></a>';
+                            }
+                            ?>
+                            <div class="aPlace_place__head">
+                                <h2 class="aPlace_place__ttl"><?php the_title();?></h2>
+                            </div>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            <?php endif; ?>
 
-<?php endif; ?>
+        </div><!-- pd_side8 -->
+    </div><!-- l_row -->
+</div><!-- aPlace -->
+
+
+
+
+
+
+
+
+
+
 
 
 <?php get_footer(); ?>

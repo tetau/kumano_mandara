@@ -5,3 +5,68 @@
 /*--------
 __common
 -----------------------------------------------*/
+
+
+/*--------
+__Archive
+-----------------------------------------------*/
+.aPlace {}
+.aPlace_ttl {
+    text-align: center;
+    span {
+        display: block;
+    }
+}
+.aPlace_termTtl {
+    font-style: normal;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.aPlace_place__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    &::after {
+        content:'';
+        display: block;
+        width: 30%;
+    }
+    li {
+        width: 30%;
+    }
+}
+.aPlace_place__thumb {
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+
+/*--------
+__Single
+-----------------------------------------------*/
+.sPlace_hero {
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+.sPlace_gmap {
+    position: relative;
+    padding-top: 56.25%;
+    height: 0;
+    iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border:0;
+    }
+}
