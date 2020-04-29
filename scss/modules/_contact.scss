@@ -1,0 +1,581 @@
+/*-- mailform --*/
+
+$form_font__color: $base_font__color;
+$form_font__size: 16px;
+$form_placeholder__color : #999;
+
+$form_border__radius: 5px;
+$form_focus__bdcolor : $base_font__color;
+
+%form_vpadding {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+%form_btn {
+    color: #fff;
+    background-color: $base_font__color;
+    padding: 1em 2em;
+    transition: all .15s linear;
+    &:hover {
+        background:darken($base_font__color,5%);
+    }
+}
+%form_bg__color {background-color: #fff;}
+
+$form_breackpoint__1: 960px;
+$form_breackpoint__2: 660px;
+$form_breackpoint__3: 480px;
+
+/*--------
+__input
+-----------------------------------------------*/
+#contactform {
+    input[type="text"],input[type="email"],input[type="tel"],textarea {
+        font-size: $form_font__size;
+        @extend %form_bg__color;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        -o-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        background: #fff;
+        @extend %form_vpadding;
+        padding-right: 1em;
+        padding-left: 1em;
+        border: 2px solid #ddd;
+        box-shadow: none;
+        border-radius: 5px;
+        resize: none;
+        box-sizing: border-box;
+        display: block;
+        &::-webkit-input-placeholder{
+            color: $form_placeholder__color;
+            font-size: 14px;
+        }
+        &::-moz-placeholder{color: $form_placeholder__color;}
+        &:-ms-input-placeholder {color: $form_placeholder__color;}
+        &:focus {
+            border-color: $form_focus__bdcolor;
+            border-radius: $form_border__radius;
+            outline: none;
+        }
+        &.input_100 {
+            width: 100%;
+        }
+        &.input_75 {
+            width: 75%;
+            @include media($form_breackpoint__2) {
+                width: 100%;
+            }
+        }
+        &.input_50 {
+            width: 50%;
+            @include media($form_breackpoint__2) {
+                width: 100%;
+            }
+        }
+        &.input_25 {
+            width: 25%;
+            @include media($form_breackpoint__2) {
+                width: 50%;
+            }
+        }
+        &.input_readonly {
+            color: $form_font__color!important;
+            pointer-events : none;
+        }
+    }
+}
+
+/*--------
+__textarea
+-----------------------------------------------*/
+#contactform {
+    textarea {
+        width: 100%;
+    }
+}
+
+/*--------
+__inputsize
+-----------------------------------------------*/
+#contactform {
+    .input_100 {
+        width: 100%;
+    }
+    .input_75 {
+        width: 75%;
+        @include media($form_breackpoint__2) {
+            width: 100%;
+        }
+    }
+    .input_50 {
+        width: 50%;
+        @include media($form_breackpoint__2) {
+            width: 100%;
+        }
+    }
+    .input_25 {
+        width: 25%;
+        @include media($form_breackpoint__2) {
+            width: 50%;
+        }
+    }
+    .input_readonly {
+        color: $form_font__color!important;
+        pointer-events : none;
+    }
+}
+
+/*--------
+__layout
+-----------------------------------------------*/
+#contactform {
+    .input_outer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: left;
+        margin: 1em 0;
+        @include media($form_breackpoint__1) {
+            flex-wrap: wrap;
+        }
+        &.singlenote {
+            display: block;
+            padding-left: 30%;
+            @include media($form_breackpoint__1) {
+                padding-left: 0;
+                text-align: center;
+            }
+        }
+        &.submit {
+            margin-top: 1.5em;
+            text-align: center;
+            display: block;
+            position: relative;
+        }
+    }
+    .input_head {
+        width: 30%;
+        text-align: right;
+        padding-right: 1.5em;
+        font-size: .85em;
+        white-space: nowrap;
+        @include media($form_breackpoint__1) {
+            width: 100%;
+            text-align: left;
+        }
+        &.required {
+            &:after {
+                content: '※';
+                font-size: .75em;
+                vertical-align: top;
+                padding-left: .25em;
+            }
+        }
+    }
+    .input_wrap {
+        width: 70%;
+        @include media($form_breackpoint__1) {
+            width: 100%;
+        }
+        .double {
+            margin-top: 1em;
+        }
+    }
+    .flex_col {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        span {
+            flex: 0 1 auto;
+        }
+        @include media(480px) {
+            flex-wrap: wrap;
+            overflow-x: scroll;
+        }
+        .flex_txt {
+            padding-left: .5em;
+            padding-right: .5em;
+            font-size: .85em;
+            display: block;
+        }
+    }
+}
+
+/*--------
+__submit
+-----------------------------------------------*/
+#contactform {
+    input[type="submit"] {
+        border-radius: 0;
+        -webkit-box-sizing: content-box;
+        -webkit-appearance: button;
+        appearance: button;
+        border: none;
+        outline: none;
+        &::-webkit-search-decoration {display: none;}
+        &::focus {outline-offset: -2px;}
+        font-size: $form_font__size;
+        @extend %form_btn;
+        display: inline-block;
+        box-sizing: border-box;
+        text-decoration: none;
+        cursor: pointer;
+        border:none;
+        opacity: 1;
+        box-sizing: border-box;
+        &:disabled {
+            opacity: 0.4;
+            background: #ccc;
+        }
+    }
+}
+
+
+/*--------
+__#accept
+-----------------------------------------------*/
+#contactform {
+    input[type='checkbox']{
+        filter: alpha(opacity=0);
+        -moz-opacity:0;
+        opacity:0;
+        position: absolute;
+    }
+    .chk_target {
+        display: block;
+        cursor: pointer;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 28px;
+            width: 28px;
+            line-height: 28px;
+            font-size: 28px;
+            font-family: 'Font Awesome 5 Free';
+            content: '\f058';
+            text-rendering: auto;
+            font-weight: bold;
+            color: #ccc;
+            transform: translateY(-50%);
+            transition: all .15s linear;
+        }
+        &.c_on{
+            &:before {
+                color: $form_font__color;
+            }
+        }
+    }
+    #accept {
+        .note {
+            display: block;
+            padding-top: .5em;
+            padding-bottom: .5em;
+            padding-left: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 1.4;
+            @include media($form_breackpoint__2) {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+/*--------
+__select
+-----------------------------------------------*/
+#contactform {
+    select {
+        font-size: $form_font__size;
+        @extend %form_bg__color;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        -o-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        background: #fff;
+        @extend %form_vpadding;
+        border: 2px solid #ddd;
+        box-shadow: none;
+        border-radius: 5px;
+        resize: none;
+        padding-left: 1em;
+        padding-right: 2em;
+        text-indent: 0.01px;
+        text-overflow: '';
+        @include media($form_breackpoint__2) {
+            padding-right: 1em;
+        }
+        &::-ms-expand {
+            display: none;
+        }
+    }
+    .select_wrap .wpcf7-form-control-wrap {
+        position: relative;
+        &::before {
+            pointer-events: none;
+            position: absolute;
+            display: block;
+            width: 1em;
+            height: auto;
+            right: .75em;
+            top: 50%;
+            font-family: 'Font Awesome 5 Free';
+            content: '\f078';
+            text-rendering: auto;
+            color: $form_font__color;
+            font-size: $form_font__size;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transform: translateY(-50%);
+            @include media($form_breackpoint__2) {
+                display: none;
+            }
+        }
+        &.flex_col {
+            .wpcf7-not-valid-tip {
+                display: none;
+            }
+        }
+    }
+    .select_wrap {
+        &.nowrap {
+            @include media($form_breackpoint__2) {
+                select {
+                    font-size: 12px!important;
+                    padding-left: .75em;
+                    padding-right: .75em;
+                }
+                .flex_txt {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+/*--------
+__radio
+-----------------------------------------------*/
+#contactform {
+    .radio_wrapper {
+        @extend %form_vpadding;
+        font-size: $form_font__size;
+    }
+    .radio_wrapper .wpcf7-form-control-wrap {
+        label {
+            cursor: pointer;
+            input[type="radio"] {
+                display: none;
+                &:checked + span {
+                    color: $base_font__color;
+                    &::after{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        left: 6px;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        background: $base_font__color;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+            span {
+                padding-left: 30px;
+                position: relative;
+                margin-right: 20px;
+                line-height: 1;
+                &::before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 24px;
+                    height: 24px;
+                    border: 2px solid #ddd;
+                    border-radius: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+        .wpcf7-list-item-label {
+            font-size: .85em;
+        }
+    }
+}
+
+/*--------
+__radio no_chkbox
+-----------------------------------------------*/
+#contactform {
+    .radio_nochk__wrapper {
+        @extend %form_vpadding;
+        font-size: $form_font__size;
+    }
+    .radio_nochk__wrapper .wpcf7-form-control-wrap {
+        label {
+            cursor: pointer;
+            input[type="radio"] {
+                display: none;
+                &:checked + span {
+                    color: #fff;
+                    background: #000;
+                }
+            }
+            span {
+                cursor: pointer;
+                line-height: 30px;
+                height: 30px;
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0 1em;
+                border-radius: 3px;
+                white-space: nowrap;
+                transition: all 0.1s linear;
+                margin: .4em .5em .4em 0;
+                color: #999;
+                background: rgba(150,150,150,.1);
+                &:hover {
+                    color: #fff;
+                    background: #000;
+                }
+            }
+        }
+        .wpcf7-list-item-label {
+            font-size: .85em;
+        }
+    }
+}
+
+/*--------
+__chkbox
+-----------------------------------------------*/
+#contactform {
+    .chkbox__wrapper {
+        @extend %form_vpadding;
+        font-size: $form_font__size;
+    }
+    .chkbox__wrapper .wpcf7-form-control-wrap {
+        label {
+            cursor: pointer;
+            input[type="checkbox"] {
+                display: none;
+                &:checked + span {
+                    color: #fff;
+                    background: #000;
+                }
+            }
+            span {
+                cursor: pointer;
+                line-height: 30px;
+                height: 30px;
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0 1em;
+                border-radius: 3px;
+                white-space: nowrap;
+                transition: all 0.1s linear;
+                margin: .4em .5em .4em 0;
+                color: #999;
+                background: rgba(150,150,150,.1);
+            }
+        }
+        .wpcf7-list-item-label {
+            font-size: .85em;
+        }
+    }
+}
+
+
+/* overwrite wpcf7 */
+div.wpcf7 {
+    position: relative;
+}
+div.wpcf7 .ajax-loader {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+div.wpcf7 img.ajax-loader {
+    display: block;
+    margin: .5em auto 0 auto!important;
+}
+div.wpcf7-response-output {
+    position: relative;
+    bottom: -20px;
+    background: none;
+    border: none;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto!important;
+    color: #fff;
+    box-sizing: border-box;
+    background: $base_font__color;
+    font-weight: bold;
+    line-height: 2;
+    @include media(600px) {
+        font-size: 12px;
+    }
+}
+div.wpcf7-mail-sent-ok,
+div.wpcf7-mail-sent-ng,
+div.wpcf7-spam-blocked,
+div.wpcf7-validation-errors {
+    border: none!important;
+}
+div.wpcf7-mail-sent-ok {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: auto;
+    transform: translate(-50%,-50%);
+    bottom: auto;
+    padding: 5vh 0;
+    background: rgba(#eee,0.85);
+    z-index: 20;
+    width: 60%;
+    border-radius: 20px;
+    color: $base_font__color;
+}
+.wpcf7-not-valid {
+    border-color: $base_font__color!important;
+    border-width: 2px!important;
+    background: lighten($base_font__color,75%)!important;
+
+}
+span.wpcf7-not-valid-tip {
+    font-size: 12px!important;
+    background: transparent!important;
+    border: none!important;
+    color: red!important;
+    box-sizing: border-box!important;
+    padding: 0 10px!important;
+    display: block;
+}
+span.wpcf7-list-item {
+    margin-left: 0;
+}
+.screen-reader-response {
+    display: none;
+}
+.wpcf7-response-output {
+}
+.wpcf7-validation-errors {
+    display: block;
+}

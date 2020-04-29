@@ -1,0 +1,213 @@
+@charset "utf-8";
+@import "../config/_base_setting";
+@import "../config/_mixin";
+
+/*-----------------------------------------------
+ __postEntry
+-----------------------------------------------*/
+
+.postEntry {
+    overflow: hidden;
+    word-break: break-all;
+    line-height: 1.75;
+    text-align: left;
+    img,
+    video,
+    embed,
+    object,
+    iframe {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    img {
+        margin: 0;
+        width: auto;
+        height: auto;
+    }
+    .attachment img {}
+    .alignleft,
+    img.alignleft {
+        display: inline;
+        float: left;
+        margin-right: 24px;
+        margin-top: 4px;
+    }
+    .alignright,
+    img.alignright {
+        display: inline;
+        float: right;
+        margin-left: 24px;
+        margin-top: 4px;
+    }
+    .aligncenter,
+    img.aligncenter {
+        clear: both;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    img.alignleft,
+    img.alignright,
+    img.aligncenter {
+        margin-bottom: 12px;
+    }
+    pre {
+        overflow: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #000;
+        margin: 0 0 1em 0;
+        line-height: 1.5em;
+        font-weight: normal;
+    }
+    h1 {
+        font-size: 2em;
+        font-weight: bold;
+        @include media(767px) {
+            font-size: 1.6em;
+            text-align: left!important;
+            br {
+                display: none;
+            }
+        }
+    }
+    h2 {
+        font-size: 1.6em;
+        font-weight: bold;
+        @include media(767px) {
+            font-size: 1.2em;
+            text-align: left!important;
+            br {
+                display: none;
+            }
+        }
+    }
+    h3 {
+        font-size: 1.3em;
+        font-weight: bold;
+        @include media(767px) {
+            font-size: 1em;
+            text-align: left!important;
+        }
+    }
+    h4 {
+        font-size: 1em;
+    }
+    h5 {
+        font-size: 1em;
+    }
+    h6 {
+        font-size: 1em;
+    }
+    strong {
+        font-weight: bold;
+    }
+    p {
+        margin-bottom: 1.5em;
+        @include media(767px) {
+            margin-bottom: 1em;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    ul {
+        list-style: square;
+        margin: 0 0 18px 1.5em;
+    li {
+        list-style: square;
+    }
+    }
+    ol {
+        list-style: decimal;
+        margin: 0 0 18px 1.5em;
+        padding: 0;
+        li {
+            list-style: decimal;
+        }
+    }
+
+    .wpview-type-gallery:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    .gallery {
+        margin: auto -6px;
+        padding: 6px 0;
+        line-height: 1;
+        overflow-x: hidden;
+        img[data-mce-selected]:focus {
+            outline: none;
+        }
+        a {
+            cursor: default;
+        }
+        .gallery-item {
+            float: left;
+            margin: 0;
+            text-align: center;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+        .gallery-caption,.gallery-icon {
+            margin: 0;
+        }
+        .gallery-caption {
+            font-size: 13px;
+            margin: 4px 0;
+        }
+    }
+
+    .ie7 .gallery,
+    .ie8 .gallery {
+        margin: auto;
+    }
+    .ie7 .gallery .gallery-item,
+    .ie8 .gallery .gallery-item {
+        padding: 6px 0;
+    }
+    .ie8 .gallery-columns-3 .gallery-item,
+    .ie7 .gallery-columns-3 .gallery-item {
+        width: 33%;
+    }
+
+    .gallery-columns-1 .gallery-item {width: 100%;}
+    .gallery-columns-2 .gallery-item {width: 50%;}
+    .gallery-columns-3 .gallery-item {width: 33.333%;}
+    .gallery-columns-4 .gallery-item {
+        width: 25%;
+        @include media(600px) {
+            width: 33.333%;
+        }
+    }
+    .gallery-columns-5 .gallery-item {width: 20%;       @include media(600px) {
+            width: 33.333%;
+        }}
+    .gallery-columns-6 .gallery-item {width: 16.665%;       @include media(600px) {
+            width: 33.333%;
+        }}
+    .gallery-columns-7 .gallery-item {width: 14.285%;       @include media(600px) {
+            width: 33.333%;
+        }}
+    .gallery-columns-8 .gallery-item {width: 12.5%;     @include media(600px) {
+            width: 33.333%;
+        }}
+    .gallery-columns-9 .gallery-item {width: 11.111%;       @include media(600px) {
+            width: 33.333%;
+        }}
+    .gallery img {
+        max-width: 100%;
+        height: auto;
+        border: none;
+        padding: 0;
+    }
+}

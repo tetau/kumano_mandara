@@ -1,0 +1,70 @@
+@charset "UTF-8";
+@import "config/base_setting";
+@import "config/mixin";
+
+
+$fontfamily: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Roboto, Meiryo, sans-serif;
+
+$fontfamily_serif: 'Times New Roman', '游明朝', YuMincho, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', 'HG明朝E', '小塚明朝 ProN', 'メイリオ', Meiryo, serif;
+
+// メインのカラム幅
+//-------------------------
+// 左右に15pxのpaddingがあるので、コンテンツは720px-30px
+.wp-block {
+    max-width: 720px;
+}
+//「幅広」ブロックの幅、コンテンツは1080px-30px
+.wp-block[data-align="wide"] {
+    max-width: 1080px;
+}
+//「全幅」ブロックの幅
+.wp-block[data-align="full"] {
+    max-width: none;
+}
+
+// タイトルのフォント設定
+//-------------------------
+.editor-post-title__block {
+  .editor-post-title__input {
+    font-family: $fontfamily;
+  }
+}
+
+
+// ブロック上下隙間 デフォルトは上下32px
+//-------------------------
+.editor-block-list__layout {
+  & >.editor-block-list__block>.editor-block-list__block-edit,
+  & >.editor-default-block-appender__content {
+    margin-bottom: 32px;
+    margin-top: 32px;
+  }
+}
+
+body {
+    line-height: 1.75;
+    font-size: 16px;
+    font-size: 1rem;
+    word-wrap : break-word;
+    overflow-wrap : break-word;
+    font-weight: normal;
+    font-family: $fontfamily;
+    text-rendering: optimizeLegibility;
+    color: $base_font__color;
+    text-align: justify;
+    &.palt {
+        font-feature-settings : "palt";
+        letter-spacing: .05em;
+    }
+    &.pkna {
+        font-feature-settings : "pkna";
+    }
+}
+
+a, a:link, a:active, a:visited {text-decoration: underline;outline: none;}
+a:hover, a:active {outline: 0;}
+a, a:visited, a:focus, a:active {color: $link-color;}
+a:hover {color: $link-color;}
+
+
+
