@@ -59,14 +59,42 @@ $template_uri = get_template_directory_uri();
                 </div>
             </div><!-- l_row -->
         </div><!-- sPlace_head -->
-        <?php
-        $cf_guidance = get_field('cf_guidance');
-        if($cf_guidance) {
-            echo '<section class="fz_15 sPlace_guidance l_border"><div class="l_row mx_1024"><div class="l_row pd_side8">';
-            echo '<h3 class="fz_24 fw700 md_sec__ttl">ご案内</h3>';
-            echo '<p>' . nl2br($cf_guidance) . '</p>';
-            echo '</div></div></section>';
-        }?>
+        <div class="fz_15 sPlace_section l_border">
+            <div class="l_row mx_1024"><div class="l_row pd_side8">
+                <section class="sPlace_column">
+                <?php
+                $cf_guidance = get_field('cf_guidance');
+                if($cf_guidance) {
+                    echo '<div class="sPlace_guidance"><h3 class="fz_24 fw700 md_sec__ttl">ご案内</h3>';
+                    echo '<p class="fz_15">' . nl2br($cf_guidance) . '</p></div>';
+                }?>
+
+
+                <?php
+                $cf_god__category = get_field('cf_god__category');
+                $cf_god__name = get_field('cf_god__name');
+                if($cf_god__category != 'なし') {
+                    echo '<div class="sPlace_god">';
+                    echo '<h3 class="fz_18 fw500 ttl"><span>' . esc_attr($cf_god__category) . '</span></h3>';
+                    if($cf_god__name) {
+                        echo '<div class="fz_18 fw500 name"><span>' . esc_attr($cf_god__name) . '</span></div>';
+                    }
+                    echo '</div>';
+                    $cf_deity = get_field('cf_deity');
+                    if($cf_deity){
+                        echo '<div class="sPlace_deity">';
+                        echo '<h3 class="fz_16 fw500 ttl"><span>御祭神</span></h3>';
+                        echo '<ul class="sPlace_deity__list">';
+                        foreach($cf_deity as $deity) {
+                            echo '<li>' . $deity['cf_deity__list'] . '</li>';
+                        }
+                        echo '</ul>';
+                        echo '</div>';
+                    }
+                }?>
+                </section>
+            </div></div>
+        </div>
 
         <div class="fz_15 sPlace_section l_border">
             <div class="l_row mx_1024"><div class="l_row pd_side8">
@@ -112,12 +140,6 @@ $template_uri = get_template_directory_uri();
                                         echo '<p class="sub_image__caption"><span>' . esc_attr($post_caption ) . '</span></p>';
                                     }
                                     echo '</li>';
-                                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
-                                    echo wp_get_attachment_image( $attachment_id, "original_thumbsq_lrg", false);
-                                    echo '</a></li>';
-                                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
-                                    echo wp_get_attachment_image( $attachment_id, "original_thumbsq_lrg", false);
-                                    echo '</a></li>';
 
                                 }
                                 ?>
@@ -192,6 +214,24 @@ $template_uri = get_template_directory_uri();
                     echo '</div>';
                 }?>
             </section>
+
+            <?php
+            $nextpost = get_adjacent_post(false, '', true);
+            $prevpost = get_adjacent_post(false, '', false);
+            if( $prevpost or $nextpost ){ ?>
+                <ul class="sPlace_adjacentPost">
+                    <?php
+                    if ( $prevpost ) {
+                        echo '<li class="prevpost"><a href="' . get_permalink($prevpost->ID) . '"><i class="fas fa-arrow-left"></i><span class="fz_30 fw700 num">' . esc_attr($cf_number) . '</span><span class="fz_24 fw500 ttl">' . get_the_title($prevpost->ID) . '</span></a></li>';
+                    }
+                    if ( $nextpost ) {
+                        $cf_number = get_field('cf_number',$nextpost->ID);
+                        echo '<li class="nextpost"><a href="' . get_permalink($nextpost->ID) . '"><span class="fz_30 fw700 num">' . esc_attr($cf_number) . '</span><span class="fz_24 fw500 ttl">' . get_the_title($nextpost->ID) . '</span><i class="fas fa-arrow-right"></i></a></li>';
+                    }
+                    ?>
+                </ul>
+            <?php } ?>
+
         </div></div>
     </article>
 <?php endwhile; ?><?php endif; ?>

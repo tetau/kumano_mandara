@@ -389,8 +389,6 @@ __Single
     }
 }
 .sPlace_guidance {
-    margin-top: 60px;
-    padding-top: 60px
 }
 .sPlace_section {
     margin-top: 60px
@@ -398,7 +396,54 @@ __Single
 .sPlace_column {
     padding-top: 60px
 }
-
+.sPlace_god {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1em;
+    padding-top: 40px;
+    .ttl {
+        span {
+            display: inline-block;
+            box-sizing: border-box;
+            border: 2px solid #000;
+            line-height: 1;
+            padding: .25em 0;
+            white-space: nowrap;
+            text-align: center;
+            width: 80px;
+        }
+    }
+    .name {
+        padding-left: 15px;
+        white-space: nowrap;
+    }
+}
+.sPlace_deity {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 1em;
+    .ttl {
+        span {
+            display: inline-block;
+            box-sizing: border-box;
+            border: 2px solid #000;
+            line-height: 1;
+            padding: .25em 0;
+            white-space: nowrap;
+            text-align: center;
+            width: 80px;
+        }
+    }
+}
+.sPlace_deity__list {
+    padding-left: 15px;
+}
 
 .sPlace_event__list {
     list-style-type: circle;
@@ -476,5 +521,39 @@ __Single
         top: 0;
         left: 0;
         border:0;
+    }
+}
+.sPlace_adjacentPost {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 60px;
+    > li {
+        &.nextpost {
+            margin-left: auto;
+        }
+        &.prevpost {
+            i {
+                padding-left: 0;
+                padding-right: 1em;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .num {
+            padding: 0 .25em;
+        }
+        i {
+            padding-left: 1em;
+        }
     }
 }
