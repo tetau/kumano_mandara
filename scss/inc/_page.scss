@@ -34,6 +34,9 @@ __header
 __footer
 -----------------------------------------------*/
 .md_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     margin-top: 80px;
     background-image: url(../images/foot_bg.png);
     background-size: cover;
@@ -60,6 +63,11 @@ __footer
 /*--------
 __common
 -----------------------------------------------*/
+body {
+    min-height: 100vh;
+    padding-bottom: 350px;
+    position: relative;
+}
 .wrapper {
     overflow: hidden;
 }
@@ -255,17 +263,58 @@ __Top
 /*--------
 __Archive
 -----------------------------------------------*/
-.aPlace {}
+.aPlace {
+    padding-top: 120px;
+}
 .aPlace_ttl {
     text-align: center;
-    span {
-        display: block;
-    }
+    border-bottom: 10px solid #000;
+    padding-bottom: .5em;
 }
 .aPlace_termTtl {
-    font-style: normal;
-    display: inline-block;
-    box-sizing: border-box;
+    text-align: center;
+    padding: 30px 0 60px 0;
+    span {
+        display: inline-block;
+        box-sizing: border-box;
+        color: #000;
+        background: $c1;
+        text-align: center;
+        border-radius: 2em;
+        line-height: 1;
+        padding: .5em 0;
+        width: 8em;
+    }
+}
+.aPlace_area__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    padding: 60px 0;
+    > li {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 20%;
+        padding: 8px 8px;
+        a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+            background: $c1;
+            text-align: center;
+            border-radius: 2em;
+            line-height: 1;
+            padding: .5em 0;
+            transition: all .1s linear;
+            &:hover {
+                background: darken($c1,10%);
+            }
+        }
+    }
 }
 
 .aPlace_place__list {
@@ -281,6 +330,32 @@ __Archive
     }
     li {
         width: 30%;
+        padding-bottom: 40px;
+        position: relative;
+    }
+}
+.aPlace_place__head {
+    padding-top: 5px;
+    .copy {
+        line-height: 1.2;
+    }
+    .aPlace_place__ttl {
+        line-height: 1.5;
+    }
+}
+.aPlace_place__num {
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    span {
+        display: block;
+        width: 40px;
+        height: 40px;
+        line-height: 36px;
+        border: 2px solid #000;
+        border-radius: 50%;
+        text-align: center;
+        background: #fff;
     }
 }
 .aPlace_place__thumb {

@@ -40,7 +40,7 @@
             </div>
         </div></div>
     </section>
-    <section class="pTop_intro l_border">s
+    <section class="pTop_intro l_border">
         <div class="l_row mx_1100"><div class="l_row pd_side8">
             <h2 class="fz_24 fw700 ltl1 pTop_intro__ttl">熊野曼陀羅巡礼のお誘い</h2>
             <div class="fz_15 pTop_intro__summary">
@@ -53,7 +53,7 @@
                 <p>従来の物流、交易の往来の道とは違う、世界遺産登録にふさわしい「紀伊山地の霊場と参 詣道』あなたの祈 りを、ここに・・・・・</p>
                 <p>みなさまに、熊野曼陀羅癒しの霊場をぜひ、お薦めいたします。</p>
             </div>
-            <div class="fz_16 fw500 pTop_intro__link"><a href="<?php echo home_url(); ?>/place/">熊野曼陀羅三十三箇所　一覧ページへ</a></div>
+            <div class="fz_16 fw500 pTop_intro__link"><a href="<?php echo home_url(); ?>/places/">熊野曼陀羅三十三箇所　一覧ページへ</a></div>
         </div></div>
     </section>
 
@@ -65,25 +65,6 @@
             <?php endforeach; ?>
         </ul>
         <?php endif; ?><!-- if($terms) -->
-
-        <?php if(have_posts()) : ?>
-            <ul class="aPlace_place__list">
-                <?php while ( have_posts() ) : the_post(); ?>
-                    <li>
-                        <?php
-                        $attachment_id = get_field('cf_main__image');
-                        if($attachment_id) {
-                            $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'original_16-9__lrg' );
-                            echo '<a href="' . get_permalink() . '"><figure class="aPlace_place__thumb"><img src="' . esc_html( $thumbnail_src[0] ) . '" class="" alt="' . get_the_title() . '"></figure></a>';
-                        }
-                        ?>
-                        <div class="aPlace_place__head">
-                            <h2 class="aPlace_place__ttl"><?php the_title();?></h2>
-                        </div>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
-        <?php endif; ?>
 
     </div>
     <?php get_footer(); ?>
