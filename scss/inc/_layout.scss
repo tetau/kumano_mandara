@@ -9,7 +9,7 @@
 .dnon {display: none;}
 
 .l_row {
-    max-width: 1440px;
+    max-width: 1600px;
     width: 100%;
     margin: 0 auto;
     &.mx_1440 {
@@ -26,6 +26,9 @@
     }
     &.mx_1100 {
         max-width: 1100px;
+    }
+    &.pd_side8 {
+        padding: 0 8%;
     }
     &.pd_side {
         padding: 0 5%;

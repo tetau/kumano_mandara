@@ -12,6 +12,7 @@ body {
     text-rendering: optimizeLegibility;
     color: $base_font__color;
     text-align: justify;
+    min-width: 1300px;
     &.palt {
         font-feature-settings : "palt";
         letter-spacing: .05em;

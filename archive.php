@@ -2,7 +2,7 @@
 
 <div class="aPlace">
     <div class="l_row mx_1024">
-        <div class="pd_side8">
+        <div class="l_row pd_side8">
             <div class="aPlace_head">
                 <h1 class="aPlace_ttl">
                     <span>三十三箇所神社仏閣</span>

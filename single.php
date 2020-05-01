@@ -1,187 +1,201 @@
 <?php get_header(); ?>
 
 <?php
-    $type = get_post_type_object($post->post_type);
-    $template_uri = get_template_directory_uri();
+$type = get_post_type_object($post->post_type);
+$template_uri = get_template_directory_uri();
 ?>
 
-<article class="sPlace">
-    <div class="l_row mx_1024">
-        <div class="pd_side8">
-            <?php if (have_posts()) : ?><?php while ( have_posts() ) : the_post(); ?>
-                <?php
-                $attachment_id = get_field('cf_main__image');
-                if($attachment_id) {
-                    $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'original_16-9__lrg' );
-                    echo '<figure class="sPlace_hero"><img src="' . esc_html( $thumbnail_src[0] ) . '" class="" alt="' . get_the_title() . '"></figure>';
-                }
-                ?>
-
-
-    <?php
-    $cf_number = get_field('cf_number');
-    if($cf_number) {
-        echo '<h3 class="fz_24">熊野曼陀羅第<span class="">' . esc_attr($cf_number) . '</span>番</h3>';
-    }?>
-
-    <?php
-    $cf_heritage = get_field('cf_heritage');
-    if($cf_heritage) {
-        echo '<p class="fz_20"><span>世界遺産</span></p>';
-    }?>
-
-    <h1 class="fz_30 fw700 "><?php the_title();?></h1>
-
-    <?php
-    $cf_furigana = get_field('cf_furigana');
-    if($cf_furigana) {
-        echo '<p class="fz_20"><span>（' . esc_attr($cf_furigana) . '）</span></p>';
-    }?>
-
-    <?php
-    $cf_headtemple = get_field('cf_headtemple');
-    if($cf_headtemple) {
-        echo '<p class="fz_20"><span>' . esc_attr($cf_headtemple) . '</span></p>';
-    }?>
-
-    <?php
-    $cf_copy = get_field('cf_copy');
-    if($cf_copy) {
-        echo '<p class="fz_20"><span>' . esc_attr($cf_copy) . '</span></p>';
-    }?>
-
-    <?php
-    $cf_tagline = get_field('cf_tagline');
-    if($cf_tagline) {
-        echo '<p class="fz_20"><span>' . esc_attr($cf_tagline) . '</span></p>';
-    }?>
-
-    <?php
-    $cf_textarea = get_field('cf_textarea');
-    if($cf_textarea) {
-        echo '<p class="fz_15"><span>' . $cf_textarea . '</span></p>';
-    }?>
-
-
-    <?php if(have_rows('cf_contents')): ?>
-        <ul class="">
-            <?php while(have_rows('cf_contents')): the_row(); ?>
-                <?php
-                $contents_ttl = get_sub_field('cf_contents__ttl');
-                $contents_summary = get_sub_field('cf_contents__summary');
-                if($contents_ttl) {
-                    echo '<p class="fz_20"><span>' . esc_attr($contents_ttl) . '</span></p>';
-                }
-                if($contents_summary) {
-                    echo '<p class="fz_20"><span>' . $contents_summary . '</span></p>';
-                }
-                ?>
-            <?php endwhile; ?>
-        </ul>
-    <?php endif; ?>
-
-    <?php if(have_rows('cf_event')): ?>
-        <ul class="">
-            <?php while(have_rows('cf_event')): the_row(); ?>
-                <?php
-                $event = get_sub_field('cf_event__list');
-                if($contents_ttl) {
-                    echo '<p class="fz_20"><span>' . esc_attr($event) . '</span></p>';
-                }
-                ?>
-            <?php endwhile; ?>
-        </ul>
-    <?php endif; ?>
-
-
-    <?php if(have_rows('cf_subimage')): ?>
-        <ul class="">
-            <?php while(have_rows('cf_subimage')): the_row(); ?>
-                <?php
-                $attachment_id = get_sub_field('cf_subimage__img');
-                $full_img = wp_get_attachment_image_src( $attachment_id , 'full' );
-                if($attachment_id) {
-                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
-                    echo wp_get_attachment_image( $attachment_id, "thumbnail", false);
-                    echo '</a></li>';
-                }
-                ?>
-            <?php endwhile; ?>
-        </ul>
-    <?php endif; ?>
-
-
-    <?php
-    $cf_poetry = get_field('cf_poetry');
-    if($cf_poetry) {
-        echo '<div class="fz_15 serif">' . $cf_poetry . '</div>';
-    }?>
-
-    <?php
-    $cf_gmap = get_field('cf_gmap');
-    if($cf_gmap) {
-        echo '<div class="sPlace_gmap">';
-        echo '<iframe src="' . esc_url($cf_gmap) . '" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
-        echo '</div>';
-    }?>
-
-
-
-    <article class="p_singleArticle">
-        <div class="p_singleArticle__row">
-            <figure class="p_singleArticle__Eyecatch">
-                <?php
-                    if(has_post_thumbnail()) {
-                        the_post_thumbnail('original_4-3__lrg', array('alt' =>$title, 'title' => $title, 'class' => 'p_singleArticle__eyeImg'));
+<?php if (have_posts()) : ?><?php while ( have_posts() ) : the_post(); ?>
+    <article class="sPlace">
+        <div class="sPlace_head">
+            <div class="l_row mx_1024">
+                <div class="l_row pd_side8">
+                    <?php
+                    $attachment_id = get_field('cf_main__image');
+                    if($attachment_id) {
+                        $thumbnail_src = wp_get_attachment_image_src( $attachment_id, 'original_16-9__lrg' );
+                        echo '<figure class="sPlace_hero"><img src="' . esc_html( $thumbnail_src[0] ) . '" class="" alt="' . get_the_title() . '"></figure>';
                     }
-                ?>
-            </figure>
-            <div class="p_singleArticle__header">
-            <?php if(has_term('','articlecat')): ?>
-            <?php
-                $args = array(
-                    'orderby' => 'term_order'
-                );
-                $article_terms = wp_get_object_terms($post->ID, array( 'articlecat'), $args );
-                if(!empty($article_terms)){
-                        if(!is_wp_error( $article_terms )){
-                                foreach($article_terms as $term){
-                                        echo '<span class="gf_robotoslab fw700 lt2 fz_13 p_singleArticle__mainterm">'.$term->slug.'</span>';
-                                }
-                        }
-                }
-            ?>
-            <?php endif; ?>
-            <time datetime="<?php the_time('c');?> " class="fz_12 p_singleArticle__date"><?php echo get_post_time('M j, Y'); ?></time>
-            <h2 class="fz_30 fw700 p_singleArticle__ttl"><?php the_title();?></h2>
-            <?php
-                $articletags = get_the_terms($post->ID, 'articletag');
-                //タームとURLを出力
-                if(!empty($articletags)){
-                        if(!is_wp_error( $articletags )){
-                                echo '<ul class="fz_13 p_singleArticle__tag">';
-                                foreach($articletags as $articletag){
-                                        echo '<li><a href="'.get_term_link($articletag->slug, $articletag->taxonomy).'">'.$articletag->name.'</a></li>';
-                                }
-                                echo '</ul>';
-                        }
-                }
-            ?>
-            </div>
+                    ?>
+                    <header class="sPlace_title__wrap">
+                        <?php
+                        $cf_number = get_field('cf_number');
+                        if($cf_number) {
+                            echo '<div class="sPlace_title__num"><span class="fz_14 serif kumano">KUMANO</span><span class="fz_14 serif mandara">MANDARA</span><span class="fz_36 fw700 num">' . esc_attr($cf_number) . '</span></div>';
+                        }?>
+                        <div class="sPlace_title">
+                            <p class="fz_15 tagline">
+                                <?php
+                                $cf_tagline = get_field('cf_tagline');
+                                if($cf_tagline) {
+                                    echo '<span>' . esc_attr($cf_tagline) . '</span>';
+                                }?>
+                                <?php
+                                $cf_copy = get_field('cf_copy');
+                                if($cf_copy) {
+                                    echo '<span>' . esc_attr($cf_copy) . '</span>';
+                                }?>
+                            </p>
+                            <h1 class="sPlace_name">
+                                <?php
+                                $cf_headtemple = get_field('cf_headtemple');
+                                if($cf_headtemple) {
+                                    echo '<p class="fz_20 fw700 headtemple"><span>' . esc_attr($cf_headtemple) . '</span></p>';
+                                }?>
+                                <span class="fz_36 fw700 ttl"><?php the_title();?></span>
+                            </h1>
+                            <?php
+                            $cf_furigana = get_field('cf_furigana');
+                            if($cf_furigana) {
+                                echo '<p class="fz_16 sPlace_rubi"><span>' . esc_attr($cf_furigana) . '</span></p>';
+                            }?>
+                        </div>
+                    </header>
+                    <?php
+                    $cf_textarea = get_field('cf_textarea');
+                    if($cf_textarea) {
+                        echo '<div class="fz_15 sPlace_summary">' . nl2br($cf_textarea) . '</div>';
+                    }?>
+                </div>
+            </div><!-- l_row -->
+        </div><!-- sPlace_head -->
+        <?php
+        $cf_guidance = get_field('cf_guidance');
+        if($cf_guidance) {
+            echo '<section class="fz_15 sPlace_guidance l_border"><div class="l_row mx_1024"><div class="l_row pd_side8">';
+            echo '<h3 class="fz_24 fw700 md_sec__ttl">ご案内</h3>';
+            echo '<p>' . nl2br($cf_guidance) . '</p>';
+            echo '</div></div></section>';
+        }?>
 
-            <div class="fz_16 postEntry p_singleArticle__postEntry">
-                <?php the_content(); ?>
-            </div>
+        <div class="fz_15 sPlace_section l_border">
+            <div class="l_row mx_1024"><div class="l_row pd_side8">
+                <?php if(have_rows('cf_event')): ?>
+                    <section class="sPlace_column">
+                        <h3 class="fz_24 fw700 md_sec__ttl">主な行事</h3>
+                        <ul class="fz_15 sPlace_event__list">
+                            <?php while(have_rows('cf_event')): the_row(); ?>
+                                <?php
+                                $event = get_sub_field('cf_event__list');
+                                if($event) {
+                                    echo '<li><p>' . esc_attr($event) . '</p></li>';
+                                }
+                                ?>
+                            <?php endwhile; ?>
+                        </ul>
+                    </section>
+                <?php endif; ?>
+                <section class="sPlace_column">
+                    <ul class="sPlace_suimage">
+                        <?php
+                        $cf_stamp = get_field('cf_stamp');
+                        if($cf_stamp) {
+                            $cf_stamp_id = get_field('cf_stamp');
+                            if($cf_stamp_id) {
+                                echo '<li class="stamp"><figure class="sPlace_stamp">';
+                                echo wp_get_attachment_image( $cf_stamp_id, "medium", false);
+                                echo '<figure></li>';
+                            }
+                        }?>
+                        <?php if(have_rows('cf_subimage')): ?>
+                            <?php while(have_rows('cf_subimage')): the_row(); ?>
+                                <?php
+                                $attachment_id = get_sub_field('cf_subimage__img');
+                                $attachment = get_post( $attachment_id );
+                                $post_caption = $attachment->post_excerpt;
+                                $full_img = wp_get_attachment_image_src( $attachment_id , 'full' );
+                                if($attachment_id) {
+                                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="sub_image">';
+                                    echo wp_get_attachment_image( $attachment_id, "original_thumbsq_lrg", false);
+                                    echo '</a>';
+                                    if($post_caption) {
+                                        echo '<p class="sub_image__caption"><span>' . esc_attr($post_caption ) . '</span></p>';
+                                    }
+                                    echo '</li>';
+                                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
+                                    echo wp_get_attachment_image( $attachment_id, "original_thumbsq_lrg", false);
+                                    echo '</a></li>';
+                                    echo '<li><a href="' . esc_url( $full_img[0] ) . '" data-fancybox="ff_' . esc_attr($day) . '">';
+                                    echo wp_get_attachment_image( $attachment_id, "original_thumbsq_lrg", false);
+                                    echo '</a></li>';
+
+                                }
+                                ?>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
+                    </ul>
+                </section>
+                <?php if(have_rows('cf_contents')): ?>
+                    <section class="sPlace_column">
+                        <?php while(have_rows('cf_contents')): the_row(); ?>
+                            <?php
+                            $contents_ttl = get_sub_field('cf_contents__ttl');
+                            $contents_summary = get_sub_field('cf_contents__summary');
+                            if($contents_ttl) {
+                                echo '<h3 class="fz_18 fw700 md_sec__ttl sub">' . esc_attr($contents_ttl) . '</h3>';
+                            }
+                            if($contents_summary) {
+                                echo '<p class="fz_15">' . $contents_summary . '</p>';
+                            }
+                            ?>
+                        <?php endwhile; ?>
+                    </section>
+                <?php endif; ?>
+            </div></div>
         </div>
+
+        <div class="fz_15 sPlace_section l_border">
+            <div class="l_row mx_1024"><div class="l_row pd_side8">
+                <?php $cf_poetry = get_field('cf_poetry');if($cf_poetry):?>
+                <section class="sPlace_column">
+                    <h3 class="fz_24 fw700 md_sec__ttl">御歌</h3>
+                    <div class="fz_24 serif sPlace_poetry"><?php echo $cf_poetry; ?></div>
+                </section>
+            <?php endif; ?>
+
+            <section class="sPlace_column">
+                <div class="sPlace_info">
+                    <h3 class="fz_18 fw700 sPlace_info__ttl"><?php the_title();?>連絡先</h3>
+                    <?php
+                    $cf_address = get_field('cf_address');
+                    if($cf_address) {
+                        echo '<p class="fz_15 sPlace_info__cont">' . esc_attr($cf_address) . '</p>';
+                    }?>
+                    <?php
+                    $cf_phone = get_field('cf_phone');
+                    if($cf_phone) {
+                        echo '<p class="fz_15 sPlace_info__cont">' . esc_attr($cf_phone) . '</p>';
+                    }?>
+                    <?php if(have_rows('cf_access__col')): ?>
+                        <div class="sPlace_access">
+                            <h3 class="fz_16 fw700 sPlace_info__ttl">交通のご案内</h3>
+                            <?php while(have_rows('cf_access__col')): the_row(); ?>
+                                <?php
+                                $access_ttl = get_sub_field('cf_access__ttl');
+                                $access_summary = get_sub_field('cf_access__summary');
+                                if($access_ttl) {
+                                    echo '<h4 class="fz_15 fw500 ttl">' . esc_attr($access_ttl) . '</h4>';
+                                }
+                                if($access_summary) {
+                                    echo '<div class="fz_15 summary">' . $access_summary . '</div>';
+                                }
+                                ?>
+                            <?php endwhile; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <?php
+                $cf_gmap = get_field('cf_gmap');
+                if($cf_gmap) {
+                    echo '<div class="sPlace_gmap">';
+                    echo '<iframe src="' . esc_url($cf_gmap) . '" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
+                    echo '</div>';
+                }?>
+            </section>
+        </div></div>
     </article>
+<?php endwhile; ?><?php endif; ?>
 
-
-
-
-            <?php endwhile; ?><?php endif; ?>
-        </div><!-- pd_side8 -->
-    </div><!-- l_row -->
-</article>
 
 <?php get_footer(); ?>
 

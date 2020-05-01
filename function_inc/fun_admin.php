@@ -9,6 +9,7 @@
 //  ----------------------------------------
     //【管理画面】左メニューadmin以外表示しない
     function remove_menu() {
+        remove_menu_page('edit.php'); // 投稿
         if (!current_user_can('administrator')) {
             // remove_menu_page('index.php'); // ダッシュボード
             // remove_menu_page('edit.php'); // 投稿

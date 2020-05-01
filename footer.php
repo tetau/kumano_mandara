@@ -2,9 +2,9 @@
 </div><!-- .wrapper-->
 
 <footer>
-    <div class="md_footer p_60" role="contentinfo">
-        <div class="l_row pd_side">
-        </div>
+    <div class="md_footer" role="contentinfo">
+        <div class="md_footer__logo"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo_full.png" alt="熊野曼陀羅"></div>
+        <p class="fz_13 copyright">&copy; NPO熊野曼陀羅</p>
     </div>
 </footer>
 

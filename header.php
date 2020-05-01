@@ -9,12 +9,25 @@
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/default.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/common.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700&display=swap&subset=japanese" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/common.css?2012" />
 </head>
 
-<body>
+<body class="gf_noto">
     <div class="wrapper" id="top">
+        <?php if(is_home()):?>
+            <div class="l_row">
+                <div class="pTop_mv">
+                    <div class="pTop_mv__logo"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo_full.png" alt="熊野曼陀羅"></div>
+                </div>
+            </div>
+        <?php endif;?>
         <header class="md_header" data-role="header">
+            <?php if(is_home()):?>
+                <h1 class="md_header__logo home"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo_blk.png" alt="熊野曼陀羅"></a></h1>
+            <?php else:?>
+                <p class="md_header__logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo_blk.png" alt="熊野曼陀羅"></a></p>
+            <?php endif;?>
         </header>
 
         <main role="main">
