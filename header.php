@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" <?php language_attributes(); ?>>
-<head prefix="og: http://ogp.me/ns# <?php if(is_home()){ echo 'fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#'; }else{ echo 'fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#'; } ?>">
+<head>
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <meta name="viewport" content="width=device-width initial-scale=1, user-scalable=yes">
     <?php get_template_part( '_modules_meta' ); ?>
