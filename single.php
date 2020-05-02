@@ -155,17 +155,19 @@ $template_uri = get_template_directory_uri();
                 <?php if(have_rows('cf_contents')): ?>
                     <section class="sPlace_column">
                         <?php while(have_rows('cf_contents')): the_row(); ?>
-                            <?php
-                            $contents_ttl = get_sub_field('cf_contents__ttl');
-                            $contents_summary = get_sub_field('cf_contents__summary');
-                            if($contents_ttl) {
-                                echo '<h3 class="fz_18 fw700 md_sec__ttl sub">' . esc_attr($contents_ttl) . '</h3>';
-                            }
-                            if($contents_summary) {
-                                echo '<p class="fz_15">' . $contents_summary . '</p>';
-                            }
-                            ?>
-                        <?php endwhile; ?>
+                            <div class="sPlace_contents">
+                                <?php
+                                $contents_ttl = get_sub_field('cf_contents__ttl');
+                                $contents_summary = get_sub_field('cf_contents__summary');
+                                if($contents_ttl) {
+                                    echo '<h3 class="fz_18 fw700 md_sec__ttl sub">' . esc_attr($contents_ttl) . '</h3>';
+                                }
+                                if($contents_summary) {
+                                    echo '<p class="fz_15">' . $contents_summary . '</p>';
+                                }
+                                ?>
+                            </div>
+                            <?php endwhile; ?>
                     </section>
                 <?php endif; ?>
             </div></div>
