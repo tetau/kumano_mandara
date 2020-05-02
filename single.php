@@ -59,42 +59,47 @@ $template_uri = get_template_directory_uri();
                 </div>
             </div><!-- l_row -->
         </div><!-- sPlace_head -->
-        <div class="fz_15 sPlace_section l_border">
-            <div class="l_row mx_1024"><div class="l_row pd_side8">
-                <section class="sPlace_column">
-                <?php
-                $cf_guidance = get_field('cf_guidance');
-                if($cf_guidance) {
-                    echo '<div class="sPlace_guidance"><h3 class="fz_24 fw700 md_sec__ttl">ご案内</h3>';
-                    echo '<p class="fz_15">' . nl2br($cf_guidance) . '</p></div>';
-                }?>
 
+        <?php
+        $cf_guidance = get_field('cf_guidance');
+        $cf_god__category = get_field('cf_god__category');
+        ?>
+        <?php if ($cf_guidance or $cf_god__category != 'なし') : ?>
+            <div class="fz_15 sPlace_section l_border">
+                <div class="l_row mx_1024"><div class="l_row pd_side8">
+                    <section class="sPlace_column">
+                        <?php
+                        $cf_guidance = get_field('cf_guidance');
+                        if($cf_guidance) {
+                            echo '<div class="sPlace_guidance"><h3 class="fz_24 fw700 md_sec__ttl">ご案内</h3>';
+                            echo '<p class="fz_15">' . nl2br($cf_guidance) . '</p></div>';
+                        }?>
+                        <?php
+                        $cf_god__name = get_field('cf_god__name');
+                        if($cf_god__category != 'なし') {
+                            echo '<div class="sPlace_god">';
+                            echo '<h3 class="fz_18 fw500 ttl"><span>' . esc_attr($cf_god__category) . '</span></h3>';
+                            if($cf_god__name) {
+                                echo '<div class="fz_18 fw500 name"><span>' . esc_attr($cf_god__name) . '</span></div>';
+                            }
+                            echo '</div>';
+                            $cf_deity = get_field('cf_deity');
+                            if($cf_deity){
+                                echo '<div class="sPlace_deity">';
+                                echo '<h3 class="fz_16 fw500 ttl"><span>御祭神</span></h3>';
+                                echo '<ul class="sPlace_deity__list">';
+                                foreach($cf_deity as $deity) {
+                                    echo '<li>' . $deity['cf_deity__list'] . '</li>';
+                                }
+                                echo '</ul>';
+                                echo '</div>';
+                            }
+                        }?>
+                    </section>
+                </div></div>
+            </div>
+        <?php endif; ?>
 
-                <?php
-                $cf_god__category = get_field('cf_god__category');
-                $cf_god__name = get_field('cf_god__name');
-                if($cf_god__category != 'なし') {
-                    echo '<div class="sPlace_god">';
-                    echo '<h3 class="fz_18 fw500 ttl"><span>' . esc_attr($cf_god__category) . '</span></h3>';
-                    if($cf_god__name) {
-                        echo '<div class="fz_18 fw500 name"><span>' . esc_attr($cf_god__name) . '</span></div>';
-                    }
-                    echo '</div>';
-                    $cf_deity = get_field('cf_deity');
-                    if($cf_deity){
-                        echo '<div class="sPlace_deity">';
-                        echo '<h3 class="fz_16 fw500 ttl"><span>御祭神</span></h3>';
-                        echo '<ul class="sPlace_deity__list">';
-                        foreach($cf_deity as $deity) {
-                            echo '<li>' . $deity['cf_deity__list'] . '</li>';
-                        }
-                        echo '</ul>';
-                        echo '</div>';
-                    }
-                }?>
-                </section>
-            </div></div>
-        </div>
 
         <div class="fz_15 sPlace_section l_border">
             <div class="l_row mx_1024"><div class="l_row pd_side8">

@@ -448,7 +448,7 @@ __Single
         &:after {
             content: '';
             display: block;
-            height: 1em;
+            height: .5em;
         }
         &:last-child {
             padding-bottom: 0;
@@ -464,6 +464,7 @@ __Single
     }
 }
 .sPlace_guidance {
+    padding-bottom: 30px;
 }
 .sPlace_section {
     margin-top: 60px
@@ -478,17 +479,15 @@ __Single
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 1em;
-    padding-top: 40px;
     .ttl {
         span {
             display: inline-block;
             box-sizing: border-box;
             border: 2px solid #000;
             line-height: 1;
-            padding: .25em 0;
+            padding: .25em .5em;
             white-space: nowrap;
             text-align: center;
-            width: 80px;
         }
     }
     .name {
@@ -509,10 +508,9 @@ __Single
             box-sizing: border-box;
             border: 2px solid #000;
             line-height: 1;
-            padding: .25em 0;
+            padding: .25em .5em;
             white-space: nowrap;
             text-align: center;
-            width: 80px;
         }
     }
 }
@@ -561,6 +559,9 @@ __Single
     writing-mode: vertical-rl;
     letter-spacing: .25em;
     line-height: 2;
+    p {
+        padding-right: 1.5em;
+    }
 }
 .sPlace_info {
     background: $c2;
