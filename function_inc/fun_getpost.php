@@ -14,7 +14,7 @@ function custom_query( $query ) {
         $query->set( 'order', 'asc' );
     return;
     }
-    if ( $query->is_post_type_archive('place') ) {
+    if ( $query->is_post_type_archive('places') ) {
         $query->set( 'post_type', 'places' );
         $query->set( 'posts_per_page', -1 );
         $query->set( 'orderby', 'menu_order' );
